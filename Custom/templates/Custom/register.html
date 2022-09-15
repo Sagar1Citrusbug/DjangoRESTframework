@@ -1,0 +1,18 @@
+{% extends 'Custom/base.html' %}
+
+{% block title %}
+ Register
+{% endblock title %}
+
+{% block content %}
+<div class  = "container">
+<h2 class = "con-item"> Register Here</h2>
+<form method = 'POST' class = "con-item">
+    {% csrf_token %}
+
+    {{form.as_div}}
+
+<input type = submit  value = "Register">
+</form>
+
+{% endblock content %}

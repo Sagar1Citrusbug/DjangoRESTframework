@@ -1,0 +1,11 @@
+{% extends 'Custom/base.html' %}
+{% block title %}
+
+{% endblock title %}
+
+{% block content %}  
+Welcome   {{user}}
+<h2> <a href = {% url "loggedout" %}>logout</a></h2>
+
+<h2> <a href = {% url 'changepassword' %}>change password </a></h2> 
+{% endblock content %}
