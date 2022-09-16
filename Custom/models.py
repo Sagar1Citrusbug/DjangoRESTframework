@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser   , BaseUserManager 
  
@@ -41,7 +42,7 @@ class myUser(AbstractBaseUser):
     REQUIRED_FIELDS = ['name']
     objects  = myUserManager()
     def __str__(self):
-        return self.email
+        return self.name
     
     def has_perm(self, perm, obj = None):
         
@@ -51,4 +52,68 @@ class myUser(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
-      
+
+
+class Author(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+class book(models.Model):
+
+    title = models.CharField(max_length=50, unique=True)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name="author_books")
+
+    
+
+    def __str__(self):
+        return self.title
+
+
+class transaction(models.Model):
+    user = models.ForeignKey(myUser, related_name="user_transactions", on_delete= models.CASCADE)
+    books = models.ForeignKey(book, related_name ="book_transactions",on_delete=models.CASCADE)
+    issue_date = models.DateField(auto_now_add=True)
+    return_date = models.DateField()
+    price = models.IntegerField()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

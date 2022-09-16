@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions, viewsets, mixins
-from ..models import myUser
-from .serializers import Userserializer
+from ..models import myUser,book , Author
+from .serializers import Userserializer, Authorserializer, bs, bookuser
 
 
 # class UserListView(viewsets.ModelViewSet):
@@ -25,10 +25,24 @@ class UserDetailView(generics.RetrieveAPIView):
     queryset= myUser.objects.all()
     serializer_class = Userserializer
 
+class authorlist(generics.ListAPIView, generics.CreateAPIView):
+    queryset = Author.objects.all()
+    serializer_class = Authorserializer
 
-from  rest_framework.authtoken.models import Token
-for user in myUser.objects.all():
+class booklist(generics.ListAPIView):
+    queryset = book.objects.all()
+    serializer_class = bs
 
-    Token.objects.get_or_create(user = user)
+class bookuser(generics.ListAPIView):
+    queryset = book.objects.all()
+    serializer_class = bookuser
+
+
+
+
+# from  rest_framework.authtoken.models import Token
+# for user in myUser.objects.all():
+
+#     Token.objects.get_or_create(user = user)
 
     
