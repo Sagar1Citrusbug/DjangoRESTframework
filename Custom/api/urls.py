@@ -7,5 +7,6 @@ urlpatterns = [
     path("excluded/", views.apibymixin.as_view(), name = "mixinapi"),
     path("author/", views.authorlist.as_view(), name = "authorapi"),
     path("books/", views.booklist.as_view(), name  = "bookapi"),
-    path("bookuser/", views.bookuser.as_view(), name = "bookuserapi")
+    path("bookuser/<int:pk>", views.bookuser.as_view(), name = "bookuserapi"),
+    path("transaction/", views.trans.as_view(), name = "transaction")
 ]

@@ -1,4 +1,5 @@
 from datetime import datetime
+from unicodedata import category
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser   , BaseUserManager 
  
@@ -56,14 +57,17 @@ class myUser(AbstractBaseUser):
 
 class Author(models.Model):
     name = models.CharField(max_length=50)
+    
 
     def __str__(self):
         return self.name
 
 class book(models.Model):
-
+    
     title = models.CharField(max_length=50, unique=True)
+    category = models.CharField(max_length=50)
     author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name="author_books")
+    
 
     
 
@@ -76,44 +80,8 @@ class transaction(models.Model):
     books = models.ForeignKey(book, related_name ="book_transactions",on_delete=models.CASCADE)
     issue_date = models.DateField(auto_now_add=True)
     return_date = models.DateField()
-    price = models.IntegerField()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @property
+    def price(self):
+        book_price = (self.return_date - self.issue_date).days * 10
+        return book_price
