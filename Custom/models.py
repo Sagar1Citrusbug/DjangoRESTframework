@@ -1,4 +1,5 @@
 from datetime import datetime
+import email
 from unicodedata import category
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser   , BaseUserManager 
@@ -53,10 +54,13 @@ class myUser(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
-
+    @property    
+    def book_count(self):
+        return self.user_has_books.count()
 
 class Author(models.Model):
     name = models.CharField(max_length=50)
+    email = models.EmailField(max_length=40, unique=True)
     
 
     def __str__(self):
@@ -74,14 +78,35 @@ class book(models.Model):
     def __str__(self):
         return self.title
 
-
+from math import ceil
+from pytz import timezone
 class transaction(models.Model):
-    user = models.ForeignKey(myUser, related_name="user_transactions", on_delete= models.CASCADE)
+    user = models.ForeignKey(myUser, related_name="user_has_books", on_delete= models.CASCADE)
     books = models.ForeignKey(book, related_name ="book_transactions",on_delete=models.CASCADE)
-    issue_date = models.DateField(auto_now_add=True)
-    return_date = models.DateField()
+    issue_date = models.DateTimeField(default=datetime.now)
+    return_date = models.DateTimeField()
 
     @property
     def price(self):
-        book_price = (self.return_date - self.issue_date).days * 10
+       if (self.return_date - self.issue_date).days == 0:
+        book_price = 10
         return book_price
+       else:
+            book_price = ceil((self.return_date - self.issue_date).days) * 10
+            return book_price
+    
+    @property
+    def Issue_Date(self):
+        return datetime.strftime(self.issue_date, '%d/%m/%y')
+    @property
+    def Return_Date(self):
+        return datetime.strftime(self.return_date, '%d/%m/%y')
+    @property
+    def Time(self):
+        now = timezone('Asia/Kolkata')
+        time = datetime.now().astimezone(now) - self.issue_date
+        return f"{time.days} days {time.seconds//3600} hours { (time.seconds - (time.seconds//3600)*3600)//60 } Minutes ago"
+       
+       
+        
+        

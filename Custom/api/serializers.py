@@ -3,30 +3,28 @@ from rest_framework import serializers
 from ..models import myUser, book, Author, transaction
 
 
-
 class  Userserializer(serializers.ModelSerializer):
-    user_has_books = serializers.PrimaryKeyRelatedField(many = True, read_only = True)
-    
+     
     class Meta:
         model = myUser
-        fields = ['name','email', 'user_has_books']
+        fields = ['name','email', 'book_count']
 
 class Authorserializer(serializers.ModelSerializer):
-    author_books = serializers.StringRelatedField(many = True)
-
+ 
     class Meta:
         model = Author
-        fields = ['name','author_books']
+        fields = ['name']
 
 class bs(serializers.ModelSerializer):
     
     author = serializers.SlugRelatedField(queryset = Author.objects.all(), slug_field='name')
+    user = serializers.StringRelatedField(many = False)
     class Meta:
         model = book
-        fields = '__all__'
+        fields ='__all__' 
 
 class bookuser(serializers.ModelSerializer):
-    author = serializers.SlugRelatedField(queryset = Author.objects.all(),slug_field='name', many = False )
+    author = serializers.SlugRelatedField(queryset = Author.objects.all(),slug_field='name', many = True )
     user = serializers.StringRelatedField(many = False)
 
     def __str__(self):
@@ -40,4 +38,4 @@ class ts(serializers.ModelSerializer):
 
     class Meta:
         model  = transaction
-        fields = ['user','books', 'issue_date', 'return_date', 'price' ]
+        fields = ['user','books', 'Issue_Date', 'Return_Date','Time' , 'price' ]
