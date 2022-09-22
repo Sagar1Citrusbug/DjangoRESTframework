@@ -41,10 +41,12 @@ class ts(serializers.ModelSerializer):
     Issue_Date = serializers.SerializerMethodField()
     Return_Date = serializers.SerializerMethodField()
     price  = serializers.SerializerMethodField()
-    Time = serializers.SerializerMethodField()
+    Issued_Time = serializers.SerializerMethodField()
+    Return_time = serializers.SerializerMethodField()
+
     class Meta:
         model  = transaction
-        fields = ['user','books', 'Issue_Date', 'Return_Date','Time' , 'price' ]
+        fields = ['user','books', 'Issue_Date', 'Return_Date','Issued_Time', 'Return_time' , 'price' ]
 
 
     def get_price(self, obj):
@@ -61,10 +63,17 @@ class ts(serializers.ModelSerializer):
     def get_Return_Date(self, obj):
         return datetime.strftime(obj.return_date, '%d/%m/%y')
     
-    def get_Time(self, obj):
+    def get_Issued_Time(self, obj):
         
         now = timezone('Asia/Kolkata')
         time = datetime.now().astimezone(now) - obj.issue_date
         return f"{time.days} days {time.seconds//3600} hours { (time.seconds - (time.seconds//3600)*3600)//60 } Minutes ago"
+
+
+    def get_Return_time(self, obj):
+        
+        now = timezone('Asia/Kolkata')
+        time = obj.return_date - datetime.now().astimezone(now)
+        return f"{time.days} days {time.seconds//3600} hours { (time.seconds - (time.seconds//3600)*3600)//60 } Minutes after"
 
     
