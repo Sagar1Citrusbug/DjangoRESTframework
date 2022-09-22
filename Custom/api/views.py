@@ -14,9 +14,7 @@ class UserDetailView(generics.RetrieveAPIView):
     queryset= myUser.objects.all()
     serializer_class = Userserializer
 
-class booklist(APIView):
-    queryset = book.objects.all()
-    serializer_class = bs
+
 from django.http import Http404
 
 class bookauthor(APIView):
