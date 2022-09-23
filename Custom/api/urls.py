@@ -8,5 +8,6 @@ urlpatterns = [
     path("author/<int:pk>", views.bookauthor.as_view(), name = "bookauthorapi"),
     path("book/", views.bookuserlist.as_view(), name = "bookuserlistapi"),
     path("book/<int:pk>", views.bookuser.as_view(), name = "bookuserapi"),
-    path("transaction/", views.trans.as_view(), name = "transaction")
+    path("transaction/", views.maketransaction.as_view(), name = "transaction"),
+   
 ]

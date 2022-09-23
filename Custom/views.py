@@ -4,11 +4,10 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login,logout
 from django.shortcuts import render, redirect
 from .models import myUser
-# from django.contrib.auth.models import User
-# from django.urls import reverse
+
 from .forms import Register, LogPage, passwordchangeform,forgetpass, Reset
 from .api.serializers import Userserializer
-# from rest_framework.decorators import api_view
+
 from rest_framework.renderers import  JSONRenderer
 from rest_framework.parsers import JSONParser
 from rest_framework.views import APIView
@@ -191,45 +190,9 @@ class user_api(APIView):
         except myUser.DoesNotExist:
             raise Http404
     def get(self,request,pk,  safe = False):
-        # all_users = myUser.objects.all()
+       
         usr = self.get_object(pk)
-        serializer = Userserializer(usr )#, many = True)
-        return Response(serializer.data)
-    def post(self,request,format = None):
-        pass
-    def put(self,request, format = None):
-        pass
-    def delete(self,request, format = None):
-        pass
+        serializer = Userserializer(usr )
+    
 
 
-# @api_view(['GET','POST','PUT','DELETE'])
-# def api(request, pk):
-#     try:
-#         usr = myUser.objects.get(pk = pk)
-#     except myUser.DoesNotExist :
-#         return response(status = status.HTTP_404_NOT_FOUND)
-#     if request.method == 'GET':
-        
-#         # all_users = myUser.objects.all()
-#         serialiazer = Userserializer(usr)
-#         return JsonResponse(serialiazer.data)
-#     elif request.method == 'POST':
-#         data = JSONParser.parse(request)
-
-#         serializer  = Userserializer(data =  data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return JsonResponse(serializer.data, status = 202)
-#         return JsonResponse(serializer.errors)
-
-#     elif request.method == 'PUT':
-#         data = JSONParser().parse(request)
-#         serializer = Userserializer(usr, data = data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return response(serializer.data, status = status.HTTP_202_ACCEPTED)
-#         return response(status = status.HTTP_304_NOT_MODIFIED)
-#     elif request.method == 'DELETE':
-#             usr.delete()
-#             return response(status = status.HTTP_200_OK)

@@ -52,9 +52,7 @@ class myUser(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
-    @property    
-    def book_count(self):
-        return self.user_has_books.count()
+    
 
 class Author(models.Model):
     name = models.CharField(max_length=50)
@@ -69,6 +67,7 @@ class book(models.Model):
     title = models.CharField(max_length=50, unique=True)
     category = models.CharField(max_length=50)
     author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name="author_books")
+    
     
 
     

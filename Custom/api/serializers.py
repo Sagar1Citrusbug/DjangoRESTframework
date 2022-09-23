@@ -4,11 +4,13 @@ from ..models import myUser, book, Author, transaction
 
 
 class  Userserializer(serializers.ModelSerializer):
-     
+    book_count = serializers.SerializerMethodField()
+
     class Meta:
         model = myUser
         fields = ['name','email', 'book_count']
-
+    def get_book_count(self,obj):
+        return obj.user_has_books.count()
 class Authorserializer(serializers.ModelSerializer):
  
     class Meta:
@@ -31,7 +33,7 @@ class bookuser(serializers.ModelSerializer):
         return self.author.name
     class Meta:
         model = book
-        fields = ['title','author', 'user'  ]
+        fields = ['title','author', 'user' ]
 from math import ceil
 from datetime import datetime
 from pytz import timezone
@@ -47,7 +49,12 @@ class ts(serializers.ModelSerializer):
     class Meta:
         model  = transaction
         fields = ['user','books', 'Issue_Date', 'Return_Date','Issued_Time', 'Return_time' , 'price' ]
-
+    
+    def check_quantity(self, obj):
+        if obj.books.quantity !=0:
+            return True
+        else:
+            raise serializers.ValidationError(detail="No books available")
 
     def get_price(self, obj):
        if (obj.return_date - obj.issue_date).days == 0:
