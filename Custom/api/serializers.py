@@ -1,4 +1,6 @@
 
+from dataclasses import field
+from pyexpat import model
 from rest_framework import serializers
 from ..models import myUser, book, Author, transaction
 
@@ -20,11 +22,13 @@ class Authorserializer(serializers.ModelSerializer):
 class bs(serializers.ModelSerializer):
     
     author = serializers.SlugRelatedField(queryset = Author.objects.all(), slug_field='name')
-    user = serializers.StringRelatedField(many = False)
-    class Meta:
-        model = book
-        fields ='__all__' 
+   
+  
 
+    class Meta:
+        model = book    
+        fields ='__all__' 
+   
 class bookuser(serializers.ModelSerializer):
     author = serializers.SlugRelatedField(queryset = Author.objects.all(),slug_field='name', many = True )
     user = serializers.StringRelatedField(many = False)
@@ -38,23 +42,24 @@ from math import ceil
 from datetime import datetime
 from pytz import timezone
 class ts(serializers.ModelSerializer):
-    books  =serializers.SlugRelatedField(read_only =  True, slug_field= 'title', many = False)
-    user  = serializers.SlugRelatedField(read_only = True, slug_field='name', many = False)
+    books  =serializers.PrimaryKeyRelatedField(read_only =  True,many = False)
+    user  = serializers.SlugRelatedField(read_only = True,slug_field='email', many = False)
     Issue_Date = serializers.SerializerMethodField()
     Return_Date = serializers.SerializerMethodField()
     price  = serializers.SerializerMethodField()
     Issued_Time = serializers.SerializerMethodField()
     Return_time = serializers.SerializerMethodField()
 
+
+    def create(self, validated_data):
+        return transaction.objects.create(**validated_data)
+
     class Meta:
         model  = transaction
-        fields = ['user','books', 'Issue_Date', 'Return_Date','Issued_Time', 'Return_time' , 'price' ]
+        fields = '__all__'
+        # fields = ['user','books', 'Issue_Date', 'Return_Date','Issued_Time', 'Return_time' , 'price' ]
     
-    def check_quantity(self, obj):
-        if obj.books.quantity !=0:
-            return True
-        else:
-            raise serializers.ValidationError(detail="No books available")
+    
 
     def get_price(self, obj):
        if (obj.return_date - obj.issue_date).days == 0:
@@ -78,9 +83,19 @@ class ts(serializers.ModelSerializer):
 
 
     def get_Return_time(self, obj):
-        
         now = timezone('Asia/Kolkata')
         time = obj.return_date - datetime.now().astimezone(now)
         return f"{time.days} days {time.seconds//3600} hours { (time.seconds - (time.seconds//3600)*3600)//60 } Minutes after"
+
+
+class PostTransactionserializer(serializers.ModelSerializer):
+    books  =serializers.SlugRelatedField(queryset = book.objects.all(),slug_field='title',many = False)
+    user  = serializers.SlugRelatedField(queryset  = myUser.objects.all(),slug_field='email', many = False)
+    
+
+    class Meta:
+        model = transaction
+        fields =['books', 'user', 'return_date']
+       
 
     

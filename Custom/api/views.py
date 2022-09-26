@@ -1,8 +1,9 @@
 from datetime import datetime
+import email
 import json
 from rest_framework import generics, permissions, viewsets, mixins
 from ..models import myUser,book , Author, transaction
-from .serializers import Userserializer, Authorserializer, bs, bookuser, ts
+from .serializers import PostTransactionserializer, Userserializer, Authorserializer, bs, bookuser, ts
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -100,14 +101,15 @@ class bookuserlist(APIView, PageNumberPagination):
 
     def post(self, request):
 
-    
+        print(request.data, type(request.data),"=======type=======")
         serializer = bs( data= request.data)
         
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data,status = status.HTTP_201_CREATED)
         return Response(status = status.HTTP_400_BAD_REQUEST)
-    
+import io
+# from  rest_framework.parsers import JSONParser 
 class maketransaction(APIView, PageNumberPagination):
      
     def get(self,request):
@@ -118,24 +120,29 @@ class maketransaction(APIView, PageNumberPagination):
         return self.get_paginated_response(serializer.data)
 
     def post(self, request):
-       
-        received_data = json.loads(request.body)
+      
+                received_data = request.data
+
+        # if book.objects.filter(pk = received_data['books']).exists():
+        #     if myUser.objects.filter(email = received_data['user']):
+
+                return_date = received_data['return_date']
+                return_date = datetime.strptime(received_data['return_date'], "%d/%m/%y")
+               
+                # received_data['books'] = book.objects.get(pk = received_data['books']) 
+                # received_data['user'] = myUser.objects.get(email = received_data['user'] ) 
+                received_data['return_date'] = return_date
+                print(received_data, "'''''''r data''''''''''")
+
+                serializer = PostTransactionserializer( data= request.data)
+
+                if serializer.is_valid():
+                    serializer.save()
+                    return Response(serializer.data,status = status.HTTP_201_CREATED)
+                print(serializer.errors, ".......Errors........")
+                return Response(status = status.HTTP_400_BAD_REQUEST)
         
-        return_date = datetime.strptime(received_data['Return_Date'], "%d/%m/%y")
-        del received_data['Return_Date']
-        received_data['return_date'] = return_date.isoformat()
-        json_data = json.dumps(received_data, indent=1)
-        print(json_data,"____________json data _____________________")
-
-        serializer = ts( data= json_data)
-
-       
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data,status = status.HTTP_201_CREATED)
-        print("____________validation failed_____________________________")
-        return Response(status = status.HTTP_400_BAD_REQUEST)
-
+            # return Response(status=status.HTTP_400_BAD_REQUEST)
     
 
     

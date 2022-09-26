@@ -79,8 +79,8 @@ class book(models.Model):
 class transaction(models.Model):
     user = models.ForeignKey(myUser, related_name="user_has_books", on_delete= models.CASCADE)
     books = models.ForeignKey(book, related_name ="book_transactions",on_delete=models.CASCADE)
-    issue_date = models.DateTimeField(default=datetime.now)
-    return_date = models.DateTimeField()
+    issue_date = models.DateTimeField(default=datetime.now())
+    return_date = models.DateTimeField(null=True)
        
        
         
