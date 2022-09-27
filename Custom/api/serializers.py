@@ -39,11 +39,12 @@ class bookuser(serializers.ModelSerializer):
         model = book
         fields = ['title','author', 'user' ]
 from math import ceil
-from datetime import datetime
+from datetime import datetime, timedelta
 from pytz import timezone
 class ts(serializers.ModelSerializer):
-    books  =serializers.PrimaryKeyRelatedField(read_only =  True,many = False)
-    user  = serializers.SlugRelatedField(read_only = True,slug_field='email', many = False)
+    books  =serializers.SlugRelatedField(queryset = book.objects.all(),slug_field='title',many = False)
+    user  = serializers.SlugRelatedField(queryset  = myUser.objects.all(),slug_field='email', many = False)
+
     Issue_Date = serializers.SerializerMethodField()
     Return_Date = serializers.SerializerMethodField()
     price  = serializers.SerializerMethodField()
@@ -51,13 +52,13 @@ class ts(serializers.ModelSerializer):
     Return_time = serializers.SerializerMethodField()
 
 
-    def create(self, validated_data):
-        return transaction.objects.create(**validated_data)
+    # def create(self, validated_data):
+    #     return transaction.objects.create(**validated_data)
 
     class Meta:
         model  = transaction
-        fields = '__all__'
-        # fields = ['user','books', 'Issue_Date', 'Return_Date','Issued_Time', 'Return_time' , 'price' ]
+        # fields = '__all__'
+        fields = ['user','books', 'Issue_Date', 'Return_Date','Issued_Time', 'Return_time' , 'price' ]
     
     
 
@@ -84,18 +85,21 @@ class ts(serializers.ModelSerializer):
 
     def get_Return_time(self, obj):
         now = timezone('Asia/Kolkata')
-        time = obj.return_date - datetime.now().astimezone(now)
+        time = obj.return_date+timedelta(hours = datetime.now().hour, minutes = datetime.now().minute, seconds= datetime.now().second+1) - datetime.now().astimezone(now)
         return f"{time.days} days {time.seconds//3600} hours { (time.seconds - (time.seconds//3600)*3600)//60 } Minutes after"
 
 
 class PostTransactionserializer(serializers.ModelSerializer):
-    books  =serializers.SlugRelatedField(queryset = book.objects.all(),slug_field='title',many = False)
-    user  = serializers.SlugRelatedField(queryset  = myUser.objects.all(),slug_field='email', many = False)
-    
+    books  =serializers.PrimaryKeyRelatedField(queryset = book.objects.all(),many = False)
+    user  = serializers.PrimaryKeyRelatedField(queryset  = myUser.objects.all(), many = False)
+
 
     class Meta:
         model = transaction
         fields =['books', 'user', 'return_date']
        
-
-    
+    def validate_return_date(self, data):
+        data = data + timedelta(hours = datetime.now().hour, minutes = datetime.now().minute, seconds= datetime.now().second+1)
+        if  data < datetime.now().astimezone(timezone('Asia/Kolkata')):
+            raise serializers.ValidationError({'return_date':'return date inappropriate'})
+        return data 

@@ -136,7 +136,7 @@ class maketransaction(APIView, PageNumberPagination):
 
                 serializer = PostTransactionserializer( data= request.data)
 
-                if serializer.is_valid():
+                if serializer.is_valid(raise_exception=True):
                     serializer.save()
                     return Response(serializer.data,status = status.HTTP_201_CREATED)
                 print(serializer.errors, ".......Errors........")
