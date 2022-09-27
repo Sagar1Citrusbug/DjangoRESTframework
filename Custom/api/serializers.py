@@ -85,9 +85,13 @@ class ts(serializers.ModelSerializer):
 
     def get_Return_time(self, obj):
         now = timezone('Asia/Kolkata')
-        time = obj.return_date+timedelta(hours = datetime.now().hour, minutes = datetime.now().minute, seconds= datetime.now().second+1) - datetime.now().astimezone(now)
-        return f"{time.days} days {time.seconds//3600} hours { (time.seconds - (time.seconds//3600)*3600)//60 } Minutes after"
-
+        if obj.return_date.day == datetime.now().astimezone(now).day:
+        
+            time = obj.return_date+timedelta(hours = 23- datetime.now().hour, minutes = 59-datetime.now().minute, seconds= 59 - datetime.now().second+1) - datetime.now().astimezone(now)
+            return f"{time.days} days {time.seconds//3600} hours { (time.seconds - (time.seconds//3600)*3600)//60 } Minutes after"
+        else:
+            time  = obj.return_date - datetime.now().astimezone(now)
+            return f"{time.days} days {time.seconds//3600} hours { (time.seconds - (time.seconds//3600)*3600)//60 } Minutes after"
 
 class PostTransactionserializer(serializers.ModelSerializer):
     books  =serializers.PrimaryKeyRelatedField(queryset = book.objects.all(),many = False)
