@@ -10,7 +10,7 @@
 <form method = 'POST' class = "con-item">
     {% csrf_token %}
 
-    {{form.as_div}}
+    {{ form.as_p }}
 
 <input type = submit  value = "Register">
 </form>

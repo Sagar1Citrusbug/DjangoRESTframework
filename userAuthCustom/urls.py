@@ -21,6 +21,7 @@ from django.urls import path, include
 from django.views.generic.base import TemplateView
 
 urlpatterns = [
+     path('customadmin/', include("customadmin.urls")),
      path('api/', include('Custom.api.urls',  namespace='api')), 
      path('admin/', admin.site.urls),
      path("", include('Custom.urls')),
