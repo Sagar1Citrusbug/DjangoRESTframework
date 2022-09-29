@@ -1,4 +1,4 @@
-{% extends 'core/base_section.html' %}
+{% extends 'customadmin/base_section.html' %}
 {% load static %}
 {% load widget_tweaks %}
 {% load admin_extras %}
@@ -33,7 +33,7 @@
 
 {% block current_breadcrumb %}
 <li class="breadcrumb-item">
-    <a href="{% url 'core:index' %}">{% trans 'Home' %}</a>
+    <a href="{% url 'customadmin:index' %}">{% trans 'Home' %}</a>
 </li>
 {% if opts.verbose_name_plural != 'Users' %}
 <li class="breadcrumb-item">
@@ -41,7 +41,7 @@
 </li>
 {% else %}
 <li class="breadcrumb-item">
-    <a href="{% url 'core:index' %}">{% trans opts.verbose_name_plural %}</a>
+    <a href="{% url 'customadmin:index' %}">{% trans opts.verbose_name_plural %}</a>
 </li>
 {% endif %}
 <li class="breadcrumb-item active">
@@ -63,7 +63,7 @@
 
 
 {% block formset_errors %}
-    {% include "core/partials/form_errors.html" with form=form %}
+    {% include "customadmin/partials/form_errors.html" with form=form %}
 {% endblock%}
 
 

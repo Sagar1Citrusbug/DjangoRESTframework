@@ -1,15 +1,15 @@
 from datetime import datetime
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser   , BaseUserManager 
+from django.contrib.auth.models import AbstractBaseUser   , BaseUserManager , PermissionsMixin
  
 class myUserManager(BaseUserManager):
-    def create_user(self, name, email, password = None):
+    def create_user(self, name, email, password = None, **kwargs):
         if not name:
             raise ValueError("Please Enter Name")
         if not email:
             raise ValueError("Email is required")
         user  = self.model(
-            name = name,
+            name  = name,
             email = self.normalize_email(email)
         )
         user.set_password(password)
@@ -17,7 +17,7 @@ class myUserManager(BaseUserManager):
         user.save(using = self._db)
         
         return user
-    def create_superuser(self, name, email,password = None):
+    def create_superuser(self, name, email,password = None, **kwargs):
         user = self.create_user(
             name = name,
              email = self.normalize_email(email),
@@ -29,7 +29,7 @@ class myUserManager(BaseUserManager):
         user.save(using  = self._db)
         return user
         
-class myUser(AbstractBaseUser):
+class myUser(AbstractBaseUser, PermissionsMixin):
 
     name = models.CharField(max_length=50, verbose_name=" User Name: ")
     email = models.EmailField(max_length=50,unique=True, verbose_name="E-mail Address :")

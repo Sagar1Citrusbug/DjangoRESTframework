@@ -1,4 +1,4 @@
-{% extends "core/ebr/registration/base.html" %}
+{% extends "customadmin/ebr/registration/base.html" %}
 {% load static %}
 {% load widget_tweaks %}
 
@@ -13,7 +13,7 @@
             <div class="middle-box text-center loginscreen animated fadeInDown">
 
                 <div class="login-logo">
-                  <img src="{% static 'core/img/logo.svg' %}" class="animated fadeInDown"/>
+                  <img src="{% static 'customadmin/img/logo.svg' %}" class="animated fadeInDown"/>
                 </div>
                 {% comment %} <object type="image/svg+xml" data="{% static '\2' %}" class="animated fadeInDown"></object> {% endcomment %}
 
@@ -53,7 +53,7 @@
 {% block js %}
 {{ block.super }}
     {% comment %} <!-- iCheck -->
-    <script src="{% static 'core/js/plugins/iCheck/icheck.min.js' %}"></script>
+    <script src="{% static 'customadmin/js/plugins/iCheck/icheck.min.js' %}"></script>
     <script>
         $(document).ready(function(){
             $('.i-checks').iCheck({

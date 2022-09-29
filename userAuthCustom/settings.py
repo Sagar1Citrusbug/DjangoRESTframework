@@ -72,6 +72,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'userAuthCustom.wsgi.application'
 AUTH_USER_MODEL  = "Custom.myUser"
+LOGIN_URL = "auth:auth_login"
+LOGIN_REDIRECT_URL = "/customadmin"
+LOGOUT_REDIRECT_URL = "auth:auth_login"
 
 
 # Database

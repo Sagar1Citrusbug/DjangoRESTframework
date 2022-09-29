@@ -9,30 +9,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  {% include "core/includes/favicons.html" %}
+  {% include "customadmin/includes/favicons.html" %}
 
   <title>{% block title %}Dashboard{% endblock %} | {{ PROJECT_TITLE }}</title>
 
   {% block css %}
   <!-- Start bare minimum -->
-  <link href="{% static 'core/css/bootstrap.min.css' %}" rel="stylesheet">
-  <link href="{% static 'core/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
-  <link href="{% static 'core/font-awesome-5/css/all.min.css' %}" rel="stylesheet">
+  <link href="{% static 'customadmin/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'customadmin/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+  <link href="{% static 'customadmin/font-awesome-5/css/all.min.css' %}" rel="stylesheet">
 
   <!-- Toastr style -->
-  <link href="{% static 'core/css/plugins/toastr/toastr.min.css' %}" rel="stylesheet">
+  <link href="{% static 'customadmin/css/plugins/toastr/toastr.min.css' %}" rel="stylesheet">
 
   <!-- Gritter -->
-  <link href="{% static 'core/js/plugins/gritter/jquery.gritter.css' %}" rel="stylesheet">
+  <link href="{% static 'customadmin/js/plugins/gritter/jquery.gritter.css' %}" rel="stylesheet">
 
-  <link href="{% static 'core/css/animate.css' %}" rel="stylesheet">
-  <link href="{% static 'core/css/style.min.css' %}" rel="stylesheet">
+  <link href="{% static 'customadmin/css/animate.css' %}" rel="stylesheet">
+  <link href="{% static 'customadmin/css/style.min.css' %}" rel="stylesheet">
   <!-- End bare minimum -->
   {% endblock css %}
 
   {% block js_head %}
-  <script src="{% static 'core/js/moment/moment.js' %}"></script>
-  <script src="{% static 'core/js/utils.js' %}"></script>
+  <script src="{% static 'customadmin/js/moment/moment.js' %}"></script>
+  <script src="{% static 'customadmin/js/utils.js' %}"></script>
   {% endblock js_head %}
 
 </head>
@@ -60,7 +60,7 @@
           <ul class="nav navbar-top-links navbar-right">
             {% if request.user.is_authenticated %}
             <li>
-                <a href="{% url 'core:user-update' pk=request.user.pk %}">
+                <a href="{% url 'customadmin:user-update' pk=request.user.pk %}">
                 <i class="fa fa-user"></i> {{ request.user }}
                 </a>
             </li>
@@ -76,7 +76,7 @@
       {% block breadcrumbs %}{% endblock breadcrumbs %}
 
       <div class="container-fluid wrapper wrapper-content animated fadeInRight">
-        {% include 'core/partials/messages.html' %}
+        {% include 'customadmin/partials/messages.html' %}
         {% block content %}{% endblock content %}
       </div>
 
@@ -91,34 +91,34 @@
 
   {% block js %}
   <!-- Mainly scripts -->
-  <script src="{% static 'core/js/jquery-3.1.1.min.js' %}"></script>
-  <script src="{% static 'core/js/popper.min.js' %}"></script>
-  <script src="{% static 'core/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'customadmin/js/jquery-3.1.1.min.js' %}"></script>
+  <script src="{% static 'customadmin/js/popper.min.js' %}"></script>
+  <script src="{% static 'customadmin/js/bootstrap.min.js' %}"></script>
   {% comment %} <script src="//code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> {% endcomment %}
 
-  <script src="{% static 'core/js/plugins/metisMenu/jquery.metisMenu.js' %}"></script>
-  <script src="{% static 'core/js/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+  <script src="{% static 'customadmin/js/plugins/metisMenu/jquery.metisMenu.js' %}"></script>
+  <script src="{% static 'customadmin/js/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
 
   <!-- Custom and plugin javascript -->
-  <script src="{% static 'core/js/inspinia.js' %}"></script>
-  <script src="{% static 'core/js/plugins/pace/pace.min.js' %}"></script>
+  <script src="{% static 'customadmin/js/inspinia.js' %}"></script>
+  <script src="{% static 'customadmin/js/plugins/pace/pace.min.js' %}"></script>
 
   <!-- jQuery UI -->
-  <script src="{% static 'core/js/plugins/jquery-ui/jquery-ui.min.js' %}"></script>
+  <script src="{% static 'customadmin/js/plugins/jquery-ui/jquery-ui.min.js' %}"></script>
 
   <!-- GITTER -->
-  <script src="{% static 'core/js/plugins/gritter/jquery.gritter.min.js' %}"></script>
+  <script src="{% static 'customadmin/js/plugins/gritter/jquery.gritter.min.js' %}"></script>
 
   <!-- Toastr -->
-  <script src="{% static 'core/js/plugins/toastr/toastr.min.js' %}"></script>
+  <script src="{% static 'customadmin/js/plugins/toastr/toastr.min.js' %}"></script>
 
   <!-- Sweet alert -->
-  <script src="{% static 'core/js/plugins/sweetalert/sweetalert.min.js' %}"></script>
+  <script src="{% static 'customadmin/js/plugins/sweetalert/sweetalert.min.js' %}"></script>
 
   <!-- Project -->
-  <script src="{% static 'core/js/core.js' %}"></script>
+  <script src="{% static 'customadmin/js/customadmin.js' %}"></script>
   {% endblock js %}
 
 </body>

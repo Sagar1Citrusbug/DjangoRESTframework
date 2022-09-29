@@ -11,10 +11,10 @@
 
     <title>{% block title %}{% endblock %} | {{ PROJECT_TITLE }}</title>
 
-    <link href="{% static 'core/css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'core/css/animate.css' %}" rel="stylesheet">
-    <link href="{% static 'core/css/style.css' %}" rel="stylesheet">
-    <link href="{% static 'core/css/custom-style.css' %}" rel="stylesheet">
+    <link href="{% static 'customadmin/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'customadmin/css/animate.css' %}" rel="stylesheet">
+    <link href="{% static 'customadmin/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'customadmin/css/custom-style.css' %}" rel="stylesheet">
 
     {% block css %}{% endblock%}
     {% block js_head %}{% endblock%}
@@ -27,8 +27,8 @@
 
     {% block js %}
     <!-- Mainly scripts -->
-    <script src="{% static 'core/js/jquery-3.1.1.min.js' %}"></script>
-    <script src="{% static 'core/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'customadmin/js/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'customadmin/js/bootstrap.min.js' %}"></script>
     {% endblock%}
 </body>
 

@@ -1,4 +1,4 @@
-{% extends 'core/change_list.html' %}
+{% extends 'customadmin/change_list.html' %}
 {% load static %}
 {% load admin_extras %}
 {% load misc_filters %}
@@ -8,7 +8,7 @@
 {% block page_content %}
     {% csrf_token %}
 
-    {% include "core/includes/list_header_card.html" with title="Create a new user" subtitle="Create a new user and assign with individual or group permissions." show_button=True %}
+    {% include "customadmin/includes/list_header_card.html" with title="Create a new user" subtitle="Create a new user and assign with individual or group permissions." show_button=True %}
 
     <div class="ibox float-e-margins">
         {% comment %} <div class="ibox-title">
@@ -66,7 +66,7 @@
                             </td>
                             
                             <td class="row-actions">
-                                {% include "core/partials/list_row_actions.html" %}
+                                {% include "customadmin/partials/list_row_actions.html" %}
                             </td>
                         </tr>
                         {% endfor %}
@@ -82,7 +82,7 @@
 
 {% block js %}
 {{ block.super }}
-<script src="{% static 'core/js/userroles.js' %}"></script>
+<script src="{% static 'customadmin/js/userroles.js' %}"></script>
 
 <script>
     var pagination_url = "{% url opts|admin_urlname:'list-ajax' %}";
@@ -93,7 +93,7 @@
 <script>
     function approve_user(user_id){
         $.ajax({
-            url: "{% url 'core:approve-user' %}",
+            url: "{% url 'customadmin:approve-user' %}",
             data: {
             'user_id': user_id
             },
@@ -105,7 +105,7 @@
     }
     function decline_user(user_id){
         $.ajax({
-            url: "{% url 'core:decline-user' %}",
+            url: "{% url 'customadmin:decline-user' %}",
             data: {
             'user_id': user_id
             },

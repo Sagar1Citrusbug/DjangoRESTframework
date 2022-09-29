@@ -1,4 +1,4 @@
-{% extends 'core/change_list.html' %}
+{% extends 'customadmin/change_list.html' %}
 {% load static %}
 {% load admin_extras %}
 {% load misc_filters %}
@@ -17,7 +17,7 @@
     </style>
     {% csrf_token %}
 
-    {# include "core/includes/list_header_card.html" with title="Create a new review" subtitle="You can add a new review details by clicking this button." #}
+    {# include "customadmin/includes/list_header_card.html" with title="Create a new review" subtitle="You can add a new review details by clicking this button." #}
 
     <div class="ibox float-e-margins">
         <div class="ibox-content">
@@ -110,7 +110,7 @@
 
 {% block js %}
     {{ block.super }}
-    <script src="{% static 'core/js/ajax_processing.js' %}"></script>
+    <script src="{% static 'customadmin/js/ajax_processing.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.js"></script>
     <script>
         $('#replyModel').on('hidden.bs.modal', function(e){

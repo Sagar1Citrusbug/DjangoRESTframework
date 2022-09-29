@@ -1,4 +1,4 @@
-{% extends 'core/change_list.html' %}
+{% extends 'customadmin/change_list.html' %}
 {% load static %}
 {% load admin_extras %}
 {% load misc_filters %}
@@ -8,7 +8,7 @@
 {% block page_content %}
     {% csrf_token %}
 
-    {% include "core/includes/list_header_card.html" with title="Create a new menu" subtitle="You can add a new menu by clicking this button." show_button=True %}
+    {% include "customadmin/includes/list_header_card.html" with title="Create a new menu" subtitle="You can add a new menu by clicking this button." show_button=True %}
 
     <div class="ibox float-e-margins">
         <div class="ibox-content">
@@ -122,7 +122,7 @@
 
 {% block js %}
     {{ block.super }}
-    <script src="{% static 'core/js/ajax_processing.js' %}"></script>
+    <script src="{% static 'customadmin/js/ajax_processing.js' %}"></script>
 
     <script>
         var pagination_url = "{% url opts|admin_urlname:'list-ajax' %}";

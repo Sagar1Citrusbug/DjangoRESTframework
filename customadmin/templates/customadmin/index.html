@@ -1,5 +1,5 @@
-{% extends 'core/base.html' %}
-
+{% extends 'customadmin/base.html' %}
+{% csrf_token %}
 {% load static %}
 {% load admin_extras %}
 {% load misc_filters %}
@@ -25,7 +25,7 @@
     <div class="col-lg-3">
       <div class="ibox ">
         <div class="ibox-title">
-          <h5>Review Categories</h5>
+          <h5>book</h5>
         </div>
         <div class="ibox-content text-center">
           <h3 class="no-margins">{{review_categories}}</h3>
@@ -35,7 +35,7 @@
     <div class="col-lg-3">
       <div class="ibox ">
         <div class="ibox-title">
-          <h5>Review Brands</h5>
+          <h5>Author</h5>
         </div>
         <div class="ibox-content text-center">
           <h3 class="no-margins">{{ review_brands }}</h3>
@@ -45,7 +45,7 @@
     <div class="col-lg-3">
       <div class="ibox ">
         <div class="ibox-title">
-          <h5>Reviews</h5>
+          <h5>transaction</h5>
         </div>
         <div class="ibox-content text-center">
           <h3 class="no-margins">{{reviews}}</h3>

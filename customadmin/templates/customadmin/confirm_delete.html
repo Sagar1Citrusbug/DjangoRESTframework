@@ -1,4 +1,4 @@
-{% extends 'core/base_section.html' %}
+{% extends 'customadmin/base_section.html' %}
 {% load misc_filters %}
 {% load i18n %}
 
@@ -14,7 +14,7 @@
 
 {% block current_breadcrumb %}
 <li class="breadcrumb-item">
-    <a href="{% url 'core:index' %}">{% trans 'Home' %}</a>
+    <a href="{% url 'customadmin:index' %}">{% trans 'Home' %}</a>
 </li>
 <li class="breadcrumb-item">
     <a href="{% url opts|admin_urlname:'list' %}">{{ opts.verbose_name_plural|capfirst }}</a>
@@ -54,7 +54,7 @@
             {% else %}
                 <p>{% blocktrans with object_name=opts.verbose_name escaped_object=object %}Are you sure you want to delete the {{ object_name }} "{{ escaped_object }}"? All of the following related items will be deleted:{% endblocktrans %}</p>
                 {% comment %} <p class="alert alert-danger">{% block delete_message %}{% endblock %} This action cannot be undone.</p> {% endcomment %}
-                {% include "core/includes/object_delete_summary.html" %}
+                {% include "customadmin/includes/object_delete_summary.html" %}
                 <h4>{% trans "Objects" %}</h4>
                 <ul>{{ deleted_objects|unordered_list }}</ul>
             {% endif %}
