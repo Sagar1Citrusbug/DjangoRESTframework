@@ -137,7 +137,7 @@
 
     <div id="wrapper">
 
-    {% comment %} {% include 'customadmin/sidebar.html' %} {% endcomment %}
+    {% include 'customadmin/sidebar.html' %}
 
     <div id="page-wrapper" class="gray-bg">
 
@@ -156,27 +156,29 @@
 
            {% comment %} sagar comments here {% endcomment %}
 
-          {% comment %} <ul class="nav navbar-top-links text-center">
+       <ul class="nav navbar-top-links text-center">
             <li>
-              <h5 class="">Welcome to <span class="color-span">EBR</span> !</h5>
+              <h5 class="">Welcome to <span class="color-span">Library Management</span> !</h5>
+              
+
             </li>
           </ul>
           <ul class="nav navbar-top-links navbar-right">
 
             {% if request.user.is_authenticated %}
             <li>
-                <a href="{% url 'customadmin:user-update' pk=request.user.pk %}">
+                {% comment %} <a href="{% url 'customadmin:user-update' pk=request.user.pk %}"> {% endcomment %}
                 <i class="fa fa-user"></i> {{ request.user }}
                 </a>
             </li>
             <li>
-              <a href="{% url 'auth:auth_logout' %}">
+              {% comment %} <a href="{% url 'Custom:loggedout' %}"> {% endcomment %}
                 <i class="fa fa-sign-out-alt"></i> Logout</a>
             </li>
             {% endif %}
           </ul>
         </nav>
-      </div> {% endcomment %}
+      </div>
 
       {% block breadcrumbs %}{% endblock breadcrumbs %}
 
@@ -187,7 +189,7 @@
 
       <div class="footer fixed">
         <div>
-          <strong>Copyright </strong> &copy; EBR {% now 'Y' %}
+
         </div>
       </div>
 

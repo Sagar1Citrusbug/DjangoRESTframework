@@ -1,4 +1,4 @@
-{% extends 'core/change_form.html' %}
+{% extends 'customadmin/change_form.html' %}
 {% load static %}
 {% load widget_tweaks %}
 {% load admin_extras %}
@@ -10,10 +10,10 @@
 {% block page_content %}
     <form id="{{ opts.model_name }}-form" action="" method="post" enctype="multipart/form-data" autocomplete="off">
         {{ form.media }}
-        {% include "core/partials/form_hidden_fields.html" %}
+        {% include "customadmin/partials/form_hidden_fields.html" %}
 
         <div class="ibox float-e-margins">
-            {% include "core/partials/ibox_title.html" with ibox_title="Review Category Details" icon_class="fas fa-info-circle" only %}
+            {% include "customadmin/partials/ibox_title.html" with ibox_title="Review Category Details" icon_class="fas fa-info-circle" only %}
             <div class="ibox-content">
 
                 <div class="row">
@@ -95,7 +95,7 @@
             <!-- /ibox-content -->
         </div>
         <!-- /ibox -->
-        {% include "core/partials/form_footer.html" %}
+        {% include "customadmin/partials/form_footer.html" %}
     </form>
 
 {% endblock %}

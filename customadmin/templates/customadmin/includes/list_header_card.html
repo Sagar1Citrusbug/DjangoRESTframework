@@ -1,6 +1,6 @@
 {% load static %}
 {% load i18n %}
-{% load admin_extras %}
+
 {% load misc_filters %}
 
 <header class="list-header card mb-4">
@@ -12,9 +12,9 @@
     {% if has_add_permission and show_button %}
       <div class="float-right lead">
         {% if opts.verbose_name_plural == 'groups' %}
-          <a href="{% url opts|admin_urlname:'create' %}" class="btn btn-primary btn-lg"><i class="fa fa-plus"></i> New Role</a>
+          {% comment %} <a href="{% url opts|admin_urlname:'create' %}" class="btn btn-primary btn-lg"><i class="fa fa-plus"></i> New Role</a> {% endcomment %}
         {% else %}
-          <a href="{% url opts|admin_urlname:'create' %}" class="btn btn-primary btn-lg"><i class="fa fa-plus"></i> New {{ opts.verbose_name|capfirst }}</a>
+          {% comment %} <a href="{% url opts|admin_urlname:'create' %}" class="btn btn-primary btn-lg"><i class="fa fa-plus"></i> New {{ opts.verbose_name|capfirst }}</a> {% endcomment %}
         {% endif %}
       </div>
     {% endif %}

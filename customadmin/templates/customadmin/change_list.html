@@ -21,7 +21,7 @@
 
 {% block current_breadcrumb %}
   <li class="breadcrumb-item">
-      <a href="{% url 'customadmin:index' %}">{% trans 'Home' %}</a>
+      {% comment %} <a href="{% url 'customadmin:index' %}">{% trans 'Home' %}</a> {% endcomment %}
   </li>
   <li class="breadcrumb-item active">
     {% if opts.verbose_name_plural == 'groups' %}

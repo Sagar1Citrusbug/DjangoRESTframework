@@ -141,7 +141,7 @@ def log_in(request):
 
 
 def logout(request):
-
+    # logout(request)
     print(request.user, "-------------------current user in session --------------------------------------")
 
 
@@ -176,7 +176,7 @@ def changepassword(request):
         return render(request,"Custom/passwordchange.html",{'form':form})
 
 
-def logged(request):
+def loggedout(request):
     logout(request)
     
     return render(request,"Custom/loggedout.html")

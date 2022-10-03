@@ -1,7 +1,7 @@
 # import imp
 from Custom.forms import LogPage
 from Custom.models import myUser
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.views import View
@@ -41,6 +41,7 @@ class Login(View):
                    if account:
                        if account.has_perm("is_admin", account):
                         login(request, user)
+                        redirect('/index')
                         return render(request,"customadmin/index.html", context)
 
                    else:
