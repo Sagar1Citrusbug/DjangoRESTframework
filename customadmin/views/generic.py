@@ -23,7 +23,7 @@ from extra_views import CreateWithInlinesView, NamedFormsetsMixin, UpdateWithInl
 from multi_form_view import MultiFormView, MultiModelFormView
 
 from ..mixins import HasPermissionsMixin, ModelOptsMixin, SuccessMessageMixin
-# from ..utils import admin_urlname, get_deleted_objects
+from ..utils import admin_urlname, get_deleted_objects
 
 MSG_CREATED = '"{}" created successfully.'
 MSG_UPDATED = '"{}" updated successfully.'
@@ -149,6 +149,7 @@ class MyUpdateView(
         view_perm = f"{opts.app_label}.{codename_view}"
         change_perm = f"{opts.app_label}.{codename_change}"
         perms = (view_perm, change_perm)
+        print("------------perm_____________________view change-------------------------")
         print(perms)
         return perms
 
@@ -158,7 +159,7 @@ class MyUpdateView(
     def get_success_url(self):
         print("MyUpdateView::get_success_url")
         opts = self.model._meta
-        return reverse("core:index")
+        return reverse("customadmin:index")
         # return reverse(admin_urlname(opts, "list"))
         # try:
         #     return reverse(admin_urlname(opts, "list"))

@@ -3,7 +3,7 @@
 
 $(document).ready(function(){
     // ---------- Review Category Server-side processing START  ----------
-    $('#reviewcategory-table').DataTable({
+    $('#book-table').DataTable({
         pageLength: 25,
         responsive: true,
         order: [[ 0, "desc" ]],
@@ -34,10 +34,10 @@ $(document).ready(function(){
     // ---------- Review Category Server-side processing END  ----------
 
     // ---------- Review Brand Server-side processing START  ----------
-    $('#reviewbrand-table').DataTable({
-        pageLength: 25,
+    $('#Author-table').DataTable({
+        pageLength: 5,
         responsive: true,
-        order: [[ 0, "desc" ]],
+        order: [[ 0, "asc" ]],
         columnDefs: [{
             orderable: false,
             targets: [-1, -2]
@@ -55,11 +55,10 @@ $(document).ready(function(){
             type: 'get',
         },
         columns: [
-            { data: 'id', name: 'id' },
+            { data: 'id', name: 'Id' },
             { data: 'name', name: 'name' },
-            { data: 'slug', name: 'slug' },
-            { data: 'reviews', name: 'reviews' },
-            { data: 'actions', name: 'actions' },
+            { data: 'email', name: 'Email' },
+
         ],
     });
     // ---------- Review Brand Server-side processing END  ----------

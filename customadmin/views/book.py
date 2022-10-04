@@ -1,6 +1,5 @@
 from Custom.models import book, myUser, Author
 from customadmin.views.generic import MyCreateView, MyDeleteView, MyListView, MyUpdateView
-from django.views import View
 from django.urls import reverse
 from customadmin.forms import BookCreateForm, BookUpdateForm
 
@@ -10,7 +9,7 @@ class BookList(MyListView):
     model = book
     queryset = model.objects.all()
     template_name = "customadmin/review_category/review_category_list.html"
-    permission_required = ("custom.view_book",)
+    permission_required = ("Custom.view_book",)
 
 
 class BookCreateView(MyCreateView):
@@ -29,11 +28,12 @@ class BookCreateView(MyCreateView):
 class BookUpdateView(MyUpdateView):
     model = book
     form_class = BookUpdateForm
+   
     template_name = "customadmin/review_category/review_category_form.html"
     permission_required = ("Custom.change_book",)
 
     def get_success_url(self):
-        print("''''''''''''''reverse'''''''''''''''")
+      
         return reverse("customadmin:book-list")
 
 class BookDeleteView(MyDeleteView):

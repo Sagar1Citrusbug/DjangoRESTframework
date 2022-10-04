@@ -17,7 +17,7 @@ class BookUpdateForm(ModelForm):
 
     class Meta:
         model = book
-        fields = '__all__'
+        fields = ['title','author', 'category']
 
 class AuthorUpdateForm(ModelForm):
     class Meta:

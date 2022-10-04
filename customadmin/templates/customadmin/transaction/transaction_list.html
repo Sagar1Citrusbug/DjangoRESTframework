@@ -11,7 +11,7 @@
 {% block page_content %}
     {% csrf_token %}
 
-    {% include "customadmin/includes/list_header_card.html" with title="Create a new Book" subtitle="You can add a new Data by clicking this button." show_button=True %}
+    {% include "customadmin/includes/list_header_card.html" with title="Create a new transaction" subtitle="You can add a new Data by clicking this button." show_button=True %}
 
     <div class="ibox float-e-margins">
         <div class="ibox-content">
@@ -20,17 +20,20 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Book Title</th>
-                        <th>Author</th>            
-                        <th>Actions</th>
+                        <th>book</th>
+                        <th>user</th>            
+                        <th>Issue date</th>
+                        <th>Return Date</th>
                     </tr>
                     </thead>
                     <tfoot>
                     <tr>
                         <th>ID</th>
-                        <th>Book Title</th>
-                        <th>Author</th>
-                        <th>Actions</th>
+                        <th>book</th>
+                        <th>user</th>            
+                        <th>Issue date</th>
+                        <th>Return Date</th>
+                       
                     </tr>
                     </tfoot>
                     <tbody>
@@ -38,16 +41,18 @@
                             {% for i in object_list %}
                             <tr>
                                 <td>{{i.id}}</td>
-                                <td>{{i.title}}</td>
-                                <td>{{i.author}}</td>
+                                <td>{{i.book}}</td>
+                                <td>{{i.user}}</td>
+                                <td>{{i.return_date}}</td>
+                                <td>{{i.issue_date}}</td>
                              {% if i.is_active %}
                              <td>Active</td>
                              {% else %}
                              <td>Inactive</td>
                              {% endif %}
                             <td>                    
-                                <a href="{% url 'customadmin:book-update' pk=i.pk %}" title="Edit" class="btn btn-primary btn-xs"><i class="fas fa-pencil-alt"></i></a>                            
-                                <a data-title="Zen" title="Delete" href="{% url 'customadmin:book-delete' pk=i.pk %}" class="btn btn-danger btn-xs btn-delete"><i class="fas fa-trash-alt"></i></a>  
+                                <a href="{% url 'customadmin:author-update' pk=i.pk %}" title="Edit" class="btn btn-primary btn-xs"><i class="fas fa-pencil-alt"></i></a>                            
+                                <a data-title="Zen" title="Delete" href="{% url 'customadmin:author-delete' pk=i.pk %}" class="btn btn-danger btn-xs btn-delete"><i class="fas fa-trash-alt"></i></a>  
                             </td>
     
                             </tr>

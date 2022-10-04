@@ -2,14 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import reverse
 from django.views.generic import TemplateView
-from customadmin.views.generic import (
-    MyCreateView,
-    MyDeleteView,
-    MyListView,
-    MyDetailView,
-    MyLoginRequiredView,
-    MyUpdateView
-)
+from customadmin.views.generic import *
 from Custom.forms import *
 
 from Custom.models import myUser, book, Author, transaction

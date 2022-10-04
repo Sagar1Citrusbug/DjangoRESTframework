@@ -33,41 +33,28 @@
                 </li>
             {% endif %}
 
-            {% if perms.customadmin.add_reviewbrand or perms.customadmin.view_reviewbrand or perms.customadmin.change_reviewbrand or perms.customadmin.delete_reviewbrand or request.user.is_superuser %}
-                <li {% if 'review-brand/' in request.path %} class="active" {% endif %}>
-                    {% comment %} <a href="{% url 'customadmin:reviewbrand-list' %}"> {% endcomment %}
-                        <i class="fa fa-bicycle fa-fw fa-2x"></i>
-                        <span class="nav-label">Brands</span>
+
+            {% if perms.Custom.add_Author or perms.Custom.view_Author or perms.Custom.change_Author or perms.Custom.delete_Author or request.user.is_superuser %}
+            <li {% if 'author/' in request.path %} class="active" {% endif %}>
+                <a href="{% url 'customadmin:author-list'%}">
+                    <i class="fa fa-list-alt fa-fw fa-2x"></i>
+                    <span class="nav-label">Author</span>
+                </a>
+            </li>
+        {% endif %}
+
+
+        {% if perms.Custom.add_transaction or perms.Custom.view_transaction or perms.Custom.change_transaction or perms.Custom.delete_transaction or request.user.is_superuser %}
+                <li {% if 'transaction/' in request.path %} class="active" {% endif %}>
+                    <a href="{% url 'customadmin:book-list'%}">
+                        <i class="fa fa-list-alt fa-fw fa-2x"></i>
+                        <span class="nav-label">Transactions</span>
                     </a>
                 </li>
             {% endif %}
 
-            {% if perms.customadmin.add_review or perms.customadmin.view_review or perms.customadmin.change_review or perms.customadmin.delete_review or request.user.is_superuser %}
-                <li {% if 'review/' in request.path %} class="active" {% endif %}>
-                    {% comment %} <a href="{% url 'customadmin:review-list' %}"> {% endcomment %}
-                        <i class="fa fa-comments fa-fw fa-2x"></i>
-                        <span class="nav-label">Reviews</span>
-                    </a>
-                </li>
-            {% endif %}
 
-            {% if perms.customadmin.add_pages or perms.customadmin.view_pages or perms.customadmin.change_pages or perms.customadmin.delete_pages or request.user.is_superuser %}
-            <li {% if 'pages/' in request.path %} class="active" {% endif %}>
-                {% comment %} <a href="{% url 'customadmin:pages-list' %}"> {% endcomment %}
-                    <i class="fa fa-file fa-fw fa-2x"></i>
-                    <span class="nav-label">Pages</span>
-                </a>
-            </li>
-            {% endif %}
 
-            {% if perms.customadmin.add_menus or perms.customadmin.view_menus or perms.customadmin.change_menus or perms.customadmin.delete_menus or request.user.is_superuser %}
-            <li {% if 'menus/' in request.path %} class="active" {% endif %}>
-                {% comment %} <a href="{% url 'customadmin:menus-list' %}"> {% endcomment %}
-                    <i class="fa fa-bars fa-fw fa-2x"></i>
-                    <span class="nav-label">Menus</span>
-                </a>
-            </li>
-            {% endif %}
 
             {% comment %}
             {% if perms.customadmin.add_trusted_accessories or perms.customadmin.view_trusted_accessories or perms.customadmin.change_trusted_accessories or perms.customadmin.delete_trusted_accessories or request.user.is_superuser %} #}

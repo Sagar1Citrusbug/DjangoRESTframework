@@ -11,11 +11,11 @@
     </div>
     {% if has_add_permission and show_button %}
       <div class="float-right lead">
-        {% if opts.verbose_name_plural == 'groups' %}
-          {% comment %} <a href="{% url opts|admin_urlname:'create' %}" class="btn btn-primary btn-lg"><i class="fa fa-plus"></i> New Role</a> {% endcomment %}
-        {% else %}
-          {% comment %} <a href="{% url opts|admin_urlname:'create' %}" class="btn btn-primary btn-lg"><i class="fa fa-plus"></i> New {{ opts.verbose_name|capfirst }}</a> {% endcomment %}
-        {% endif %}
+        {% comment %} {% if opts.verbose_name_plural == 'groups' %} {% endcomment %}
+          {% comment %} <a href="{% url'customadmin:book-create' %}" class="btn btn-primary btn-lg"><i class="fa fa-plus"></i> New Role</a> {% endcomment %}
+        {% comment %} {% else %} {% endcomment %}
+          <a href="{% url 'customadmin:book-create' %}" class="btn btn-primary btn-lg"><i class="fa fa-plus"></i> New {{ opts.verbose_name|capfirst }}</a>
+        {% comment %} {% endif %} {% endcomment %}
       </div>
     {% endif %}
   </div>

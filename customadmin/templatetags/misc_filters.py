@@ -45,7 +45,9 @@ def admin_urlname(value, arg):
     
     # print('---------------------------------------------------------------------------------',value)
     pattern = "%s:%s-%s" % (value.app_label, value.model_name, arg)
-    # print('---------------------------------------------------------------------------------',pattern)
+    print(value,"'''''''''value'''''''''")
+    print(arg, "sdfsffsff")
+    print('---------------------------------------------------------------------------------',pattern)
     return pattern
 
 
