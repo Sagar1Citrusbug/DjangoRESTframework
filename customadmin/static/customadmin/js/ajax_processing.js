@@ -3,37 +3,7 @@
 
 $(document).ready(function(){
     // ---------- Review Category Server-side processing START  ----------
-    $('#book-table').DataTable({
-        pageLength: 25,
-        responsive: true,
-        order: [[ 0, "desc" ]],
-        columnDefs: [{
-            orderable: false,
-            targets: [-1, -2]
-        },],
-
-        // Ajax for pagination
-        "language":
-        {
-            "processing": "<b><i class='fa fa-refresh fa-spin'></i>&nbsp;Loading....</b>",
-        },
-        processing: true,
-        serverSide: true,
-        ajax: {
-            url: window.pagination_url,
-            type: 'get',
-        },
-        columns: [
-            { data: 'id', name: 'id' },
-            { data: 'name', name: 'name' },
-            { data: 'slug', name: 'slug' },
-            { data: 'reviews', name: 'reviews' },
-            { data: 'actions', name: 'actions' },
-        ],
-    });
-    // ---------- Review Category Server-side processing END  ----------
-
-    // ---------- Review Brand Server-side processing START  ----------
+   
     $('#Author-table').DataTable({
         pageLength: 5,
         responsive: true,
@@ -55,22 +25,21 @@ $(document).ready(function(){
             type: 'get',
         },
         columns: [
-            { data: 'id', name: 'Id' },
+            { data: 'id', name: 'id' },
             { data: 'name', name: 'name' },
-            { data: 'email', name: 'Email' },
+            { data: 'email', name: 'email' },
+            { data: 'actions', name: 'actions' },
 
         ],
     });
-    // ---------- Review Brand Server-side processing END  ----------
 
-    // ---------- Review Server-side processing START  ----------
-    $('#review-table').DataTable({
-        pageLength: 25,
+    $('#book-table').DataTable({
+        pageLength: 5,
         responsive: true,
-        order: [[ 0, "desc" ]],
+        order: [[ 0, "asc" ]],
         columnDefs: [{
             orderable: false,
-            targets: -1
+            targets: [-1, -2]
         },],
 
         // Ajax for pagination
@@ -86,23 +55,22 @@ $(document).ready(function(){
         },
         columns: [
             { data: 'id', name: 'id' },
-            { data: 'name', name: 'name' },
-            { data: 'create_by__full_name', name: 'create_by__full_name' },
-            { data: 'status', name: 'status' },
+            { data: 'title', name: 'name' },
+            { data: 'author', name: 'author' },
+            { data: 'category', name: 'category' },
             { data: 'actions', name: 'actions' },
+
         ],
     });
-    // ---------- Review Server-side processing END  ----------
 
 
-    // ---------- Pages Server-side processing START  ----------
-    $('#pages-table').DataTable({
-        pageLength: 25,
+    $('#transaction-table').DataTable({
+        pageLength: 5,
         responsive: true,
-        order: [[ 0, "desc" ]],
+        order: [[ 0, "asc" ]],
         columnDefs: [{
             orderable: false,
-            targets: -1
+            targets: [-1, -2]
         },],
 
         // Ajax for pagination
@@ -118,83 +86,17 @@ $(document).ready(function(){
         },
         columns: [
             { data: 'id', name: 'id' },
-            { data: 'page_title', name: 'page_title' },
-            { data: 'create_by__full_name', name: 'create_by__full_name' },
-            { data: 'status', name: 'status' },
-            { data: 'actions', name: 'actions' },
+            { data: 'user', name: 'user' },
+            { data: 'book', name: 'book' },
+            { data: 'issue_date', name: 'issue_date' },
+            { data: 'return_date', name: 'return_date' },
+
         ],
     });
-    // ---------- Pages Server-side processing END  ----------
 
-    // // ---------- Menus Server-side processing START  ----------
-    // $('#menus-table').DataTable({
-    //     pageLength: 25,
-    //     responsive: true,
-    //     order: [[ 0, "desc" ]],
-    //     columnDefs: [{
-    //         orderable: false,
-    //         targets: -1
-    //     },],
-    //     "dataSrc": function ( json ) {
-    //         console.log(json)
-    //     },
-    //     "bSort":false,
-    //     info: false,
-    //     // Ajax for pagination
-    //     "language":
-    //     {
-    //         "processing": "<b><i class='fa fa-refresh fa-spin'></i>&nbsp;Loading....</b>",
-    //     },
-    //     processing: true,
-    //     serverSide: true,
-    //     ajax: {
-    //         url: window.pagination_url,
-    //         type: 'get',
-    //     },
-    //     "drawCallback": function (settings) {
-    //         // Here the response
-    //         var response = settings.json['data'];
-    //     },
-    //     columns: [
-    //         { data: 'id', name: 'id' },
-    //         { data: 'name', name: 'name' },
-    //         { data: 'menu_location', name: 'menu_location' },
-    //         { data: 'actions', name: 'actions' },
-    //     ],
-    // });
-    // // ---------- Menus Server-side processing END  ----------
 
-    // ---------- Trusted accessories Server-side processing START  ----------
-    $('#trustedaccessories-table').DataTable({
-        pageLength: 25,
-        responsive: true,
-        order: [[ 0, "desc" ]],
-        columnDefs: [{
-            orderable: false,
-            targets: -1
-        },],
 
-        // Ajax for pagination
-        "language":
-        {
-            "processing": "<b><i class='fa fa-refresh fa-spin'></i>&nbsp;Loading....</b>",
-        },
-        processing: true,
-        serverSide: true,
-        ajax: {
-            url: window.pagination_url,
-            type: 'get',
-        },
-        columns: [
-            { data: 'id', name: 'id' },
-            { data: 'name', name: 'name' },
-            { data: 'status', name: 'status' },
-            { data: 'actions', name: 'actions' },
-        ],
-    });
-    // ---------- Trusted accessories Server-side processing END  ----------
-
-    // ---------- Trusted accessories Server-side processing START  ----------
+   
     $('#comments-table').DataTable({
         pageLength: 25,
         responsive: true,

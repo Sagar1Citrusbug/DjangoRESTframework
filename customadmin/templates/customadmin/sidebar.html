@@ -46,7 +46,7 @@
 
         {% if perms.Custom.add_transaction or perms.Custom.view_transaction or perms.Custom.change_transaction or perms.Custom.delete_transaction or request.user.is_superuser %}
                 <li {% if 'transaction/' in request.path %} class="active" {% endif %}>
-                    <a href="{% url 'customadmin:book-list'%}">
+                    <a href="{% url 'customadmin:transaction-list'%}">
                         <i class="fa fa-list-alt fa-fw fa-2x"></i>
                         <span class="nav-label">Transactions</span>
                     </a>
@@ -56,25 +56,8 @@
 
 
 
-            {% comment %}
-            {% if perms.customadmin.add_trusted_accessories or perms.customadmin.view_trusted_accessories or perms.customadmin.change_trusted_accessories or perms.customadmin.delete_trusted_accessories or request.user.is_superuser %} #}
-            <li {% if 'trusted-accessories/' in request.path %} class="active" {% endif %}>
-                <a href="{% url 'customadmin:trustedaccessories-list' %}">
-                    <i class="fa fa-ad fa-fw fa-2x"></i>
-                    <span class="nav-label">Trusted</span>
-                </a>
-            </li>
-            {% endif %}
-            {% endcomment %}
-
-            {% if perms.customadmin.add_comments or perms.customadmin.view_comments or perms.customadmin.change_comments or perms.customadmin.delete_comments or request.user.is_superuser %}
-            <li {% if 'comments/' in request.path %} class="active" {% endif %}>
-                {% comment %} <a href="{% url 'customadmin:comments-list' %}"> {% endcomment %}
-                    <i class="fa fa-comment fa-fw fa-2x"></i>
-                    <span class="nav-label">Comments</span>
-                </a>
-            </li>
-            {% endif %}
+          
+          
 
         </ul>
     </div>
