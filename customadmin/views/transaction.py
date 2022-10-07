@@ -8,6 +8,7 @@ from django.template.loader import get_template
 from django_datatables_too.mixins import DataTableMixin
 from django.urls import reverse
 from django.http import JsonResponse
+from customadmin.forms import TransactionCreateForm, TransactionUpdateForm
 
 
 from customadmin.mixins import HasPermissionsMixin
@@ -19,12 +20,38 @@ class TransactionListView(MyListView):
     template_name = "customadmin/Transaction/Transaction_list.html"
     permission_required = ("Custom.view_Transaction",)
 class TransactionCreateView(MyCreateView):
-    pass
-class TransactionUpdateView(MyUpdateView):
-    pass
-class TransactionDeleteView(MyDeleteView):
-    pass
+    model = transaction
+    form_class = TransactionCreateForm
+    template_name = "customadmin/transaction/transaction_update.html"
+    permission_required = ("Custom.add_transaction",)
 
+    def form_valid(self, form):
+        form.instance.create_by = self.request.user
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        # opts = self.model._meta
+        return reverse("customadmin:transaction-list")
+class TransactionUpdateView(MyUpdateView):
+    model = transaction
+    form_class = TransactionUpdateForm
+   
+    template_name = "customadmin/transaction/transaction_update.html"
+    permission_required = ("Custom.change_transaction",)
+
+    def get_success_url(self):
+      
+        return reverse("customadmin:transaction-list")
+
+
+class TransactionDeleteView(MyDeleteView):
+    model = transaction
+    template_name = "customadmin/confirm_delete.html"
+    permission_required = ("Custom.delete_transaction",)
+
+    def get_success_url(self):
+       
+        return reverse("customadmin:transaction-list")
 
 class TransactionAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequiredView):
     """
@@ -80,7 +107,7 @@ class TransactionAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequ
                     "id": o.id,
                     # "name":  "<a href='" + url + "'>" + o.name + "</a>",
                     "user": o.user.name,
-                    "book":o.books.title,
+                    "books":o.books.title,
                     "issue_date":o.issue_date,
                      "return_date":o.return_date,
                     

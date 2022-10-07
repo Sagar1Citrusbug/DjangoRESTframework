@@ -34,7 +34,7 @@ $(document).ready(function(){
     });
 
     $('#book-table').DataTable({
-        pageLength: 5,
+        pageLength: 10,
         responsive: true,
         order: [[ 0, "asc" ]],
         columnDefs: [{
@@ -55,7 +55,7 @@ $(document).ready(function(){
         },
         columns: [
             { data: 'id', name: 'id' },
-            { data: 'title', name: 'name' },
+            { data: 'title', name: 'title' },
             { data: 'author', name: 'author' },
             { data: 'category', name: 'category' },
             { data: 'actions', name: 'actions' },
@@ -65,7 +65,7 @@ $(document).ready(function(){
 
 
     $('#transaction-table').DataTable({
-        pageLength: 5,
+        pageLength: 10,
         responsive: true,
         order: [[ 0, "asc" ]],
         columnDefs: [{
@@ -87,7 +87,7 @@ $(document).ready(function(){
         columns: [
             { data: 'id', name: 'id' },
             { data: 'user', name: 'user' },
-            { data: 'book', name: 'book' },
+            { data: 'books', name: 'books' },
             { data: 'issue_date', name: 'issue_date' },
             { data: 'return_date', name: 'return_date' },
 

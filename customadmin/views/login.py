@@ -1,4 +1,5 @@
 # import imp
+from graphviz import view
 from Custom.forms import LogPage
 from Custom.models import myUser
 from django.shortcuts import render, redirect
@@ -43,7 +44,8 @@ class Login(View):
                         login(request, user)
                         redirect('/index')
                         return render(request,"customadmin/index.html", context)
-
+                       else:
+                        return HttpResponse("YOU are not a superuser")
                    else:
                         return HttpResponse("password or email is wrong")
                 else:
@@ -52,3 +54,10 @@ class Login(View):
             else:
            
                 return render(request, "customadmin/ebr/registration/login.html",{'form':form} )
+
+
+class logout(View):
+
+    def get(self, request):
+        logout(request)
+        render(request,'Custom.loggedout.html')

@@ -24,8 +24,8 @@ urlpatterns = [
     path('transaction-create/',views.TransactionCreateView.as_view(),name='transaction-create'),
     path('ajax-author', views.AuthorAjaxPagination.as_view(), name = "author-list-ajax"),
     path('ajax-book', views.BookAjaxPagination.as_view(), name = "book-list-ajax"),
-    path('ajax-transaction', views.TransactionAjaxPagination.as_view(), name = "transaction-list-ajax")
-
+    path('ajax-transaction', views.TransactionAjaxPagination.as_view(), name = "transaction-list-ajax"),
+    path('logout/',views.logout.as_view(), name = "logout")
     
 	# path("ajax-agency-user", AgencyUserAjaxPagination.as_view(), name="agencyuser-list-ajax"),
 ]

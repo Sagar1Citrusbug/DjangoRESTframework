@@ -23,3 +23,16 @@ class AuthorUpdateForm(ModelForm):
     class Meta:
         model = Author
         fields = ['name', 'email']
+
+
+
+class TransactionCreateForm(ModelForm):
+    class Meta:
+        model = transaction
+        fields = ['user', 'books', 'issue_date', 'return_date']
+
+
+class TransactionUpdateForm(ModelForm):
+    class Meta:
+        model = transaction
+        fields = ['user', 'books', 'issue_date', 'return_date']

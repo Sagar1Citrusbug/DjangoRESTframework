@@ -1,0 +1,22 @@
+{% load static %}
+{% load i18n %}
+
+{% load misc_filters %}
+
+<header class="list-header card mb-4">
+  <div class="card-body clearfix">
+    <div class="float-left">
+      <h5 class="card-title">{{ title }}</h5>
+      <p class="card-subtitle text-muted">{{ subtitle }}</p>
+    </div>
+    {% if has_add_permission and show_button %}
+      <div class="float-right lead">
+        {% comment %} {% if opts.verbose_name_plural == 'groups' %} {% endcomment %}
+          {% comment %} <a href="{% url'customadmin:book-create' %}" class="btn btn-primary btn-lg"><i class="fa fa-plus"></i> New Role</a> {% endcomment %}
+        {% comment %} {% else %} {% endcomment %}
+          <a href="{% url 'customadmin:transaction-create' %}" class="btn btn-primary btn-lg"><i class="fa fa-plus"></i> New {{ opts.verbose_name|capfirst }}</a>
+        {% comment %} {% endif %} {% endcomment %}
+      </div>
+    {% endif %}
+  </div>
+</header>

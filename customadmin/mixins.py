@@ -21,7 +21,7 @@ class SuccessMessageMixin(object):
         response = super().form_valid(form)
         print("------------response-----", response)
         success_message = self.get_success_message()
-        if not self.request.is_ajax() and success_message:
+        if  success_message:
             messages.success(self.request, success_message)
         return response
 

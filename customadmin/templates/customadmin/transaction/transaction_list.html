@@ -11,7 +11,7 @@
 {% block page_content %}
     {% csrf_token %}
 
-    {% include "customadmin/includes/list_header_card.html" with title="Create a new transaction" subtitle="You can add a new Data by clicking this button." show_button=True %}
+    {% include "customadmin/transaction/transaction_list_header_card.html" with title="Create a new transaction" subtitle="You can add a new Data by clicking this button." show_button=True %}
 
     <div class="ibox float-e-margins">
         <div class="ibox-content">

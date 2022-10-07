@@ -7,6 +7,7 @@ from django.template.loader import get_template
 from django_datatables_too.mixins import DataTableMixin
 from django.urls import reverse
 from django.http import JsonResponse
+from customadmin.forms import AuthorCreateForm, AuthorUpdateForm
 
 
 from customadmin.mixins import HasPermissionsMixin
@@ -18,11 +19,37 @@ class AuthorListView(MyListView):
     template_name = "customadmin/author/author_list.html"
     permission_required = ("Custom.view_Author",)
 class AuthorCreateView(MyCreateView):
-    pass
+    model = Author
+    form_class = AuthorCreateForm
+    template_name = "customadmin/author/author_update.html"
+    permission_required = ("Custom.add_author",)
+
+    def form_valid(self, form):
+        form.instance.create_by = self.request.user
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        # opts = self.model._meta
+        return reverse("customadmin:author-list")
 class AuthorUpdateView(MyUpdateView):
-    pass
+    model = Author
+    form_class = AuthorUpdateForm
+   
+    template_name = "customadmin/author/author_update.html"
+    permission_required = ("Custom.change_author",)
+
+    def get_success_url(self):
+      
+        return reverse("customadmin:author-list")
 class AuthorDeleteView(MyDeleteView):
-    pass
+    model = Author
+    template_name = "customadmin/confirm_delete.html"
+    permission_required = ("Custom.delete_Author",)
+
+    def get_success_url(self):
+       
+        return reverse("customadmin:author-list")
+
 
 
 class AuthorAjaxPagination(DataTableMixin, HasPermissionsMixin, MyLoginRequiredView):
