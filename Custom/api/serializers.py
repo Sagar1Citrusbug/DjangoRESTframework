@@ -1,6 +1,6 @@
 
 from dataclasses import field
-from pyexpat import model
+# from pyexpat import model
 from rest_framework import serializers
 from ..models import myUser, book, Author, transaction
 
@@ -29,20 +29,21 @@ class bs(serializers.ModelSerializer):
         model = book    
         fields ='__all__' 
    
-class bookuser(serializers.ModelSerializer):
-    author = serializers.SlugRelatedField(queryset = Author.objects.all(),slug_field='name', many = True )
-    user = serializers.StringRelatedField(many = False)
+# class bookuser(serializers.ModelSerializer):
+#     author = serializers.SlugRelatedField(queryset = Author.objects.all(),slug_field='name', many = True )
+#     user = serializers.StringRelatedField(many = False)
 
-    def __str__(self):
-        return self.author.name
-    class Meta:
-        model = book
-        fields = ['title','author', 'user' ]
+#     def __str__(self):
+#         return self.author.name
+#     class Meta:
+#         model = book
+#         fields = ['title','author', 'user' ]
 from math import ceil
 from datetime import datetime, timedelta
 from pytz import timezone
 class ts(serializers.ModelSerializer):
-    books  =serializers.SlugRelatedField(queryset = book.objects.all(),slug_field='title',many = False)
+    books = bs(many = False, read_only = True)
+    # books  =serializers.SlugRelatedField(queryset = book.objects.all(),slug_field='title',many = False)
     user  = serializers.SlugRelatedField(queryset  = myUser.objects.all(),slug_field='email', many = False)
 
     Issue_Date = serializers.SerializerMethodField()
@@ -96,7 +97,7 @@ class ts(serializers.ModelSerializer):
 class PostTransactionserializer(serializers.ModelSerializer):
     books  =serializers.PrimaryKeyRelatedField(queryset = book.objects.all(),many = False)
     user  = serializers.PrimaryKeyRelatedField(queryset  = myUser.objects.all(), many = False)
-
+    
 
     class Meta:
         model = transaction

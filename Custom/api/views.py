@@ -3,7 +3,7 @@ import email
 import json
 from rest_framework import generics, permissions, viewsets, mixins
 from ..models import myUser,book , Author, transaction
-from .serializers import PostTransactionserializer, Userserializer, Authorserializer, bs, bookuser, ts
+from .serializers import PostTransactionserializer, Userserializer, Authorserializer, bs,  ts
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -116,8 +116,9 @@ class maketransaction(APIView, PageNumberPagination):
        
         transactions = transaction.objects.all()
         transactions_pagination = self.paginate_queryset(transactions, request)
-        serializer = ts(transactions_pagination, many = True)
+        serializer = ts(transactions_pagination, many = True, context={"request": request})
         return self.get_paginated_response(serializer.data)
+       
 
     def post(self, request):
       
